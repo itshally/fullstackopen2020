@@ -1,0 +1,38 @@
+title 0.5: Single Page App Sequence Diagram
+# author: Hally / Harriette Bianan
+# date: June 17, 2020
+
+
+# the browser sends an HTTP GET request to the server to display the SPA page
+browser -> server : HTTP POST https://fullstack-exampleapp.herokuapp.com/spa
+
+server --> browser  : HTML-code
+
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+server --> browser  : main.css
+
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
+
+
+# JavaScript code starts to do its asynchronus 
+server --> browser  : spa.js
+
+note over browser :
+browser starts executing js-code
+that requests JSON data from server
+end note
+
+
+# the code makes a requests to the URL, which then returns the notes as JSON data
+# and adds HTML elements to display the notes to the page using the DOM-API
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+
+server --> browser : [{content: "HTML is easy", date: "2019-05-23T17:30:31.098Z"},…]
+
+
+#  executes the event handler that renders the notes to display using DOM-API
+note over browser :
+browser executes the event handler
+that renders notes to display
+end note
