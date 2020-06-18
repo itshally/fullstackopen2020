@@ -4,7 +4,7 @@ title 0.5: Single Page App Sequence Diagram
 
 
 # the browser sends an HTTP GET request to the server to display the SPA page
-browser -> server : HTTP POST https://fullstack-exampleapp.herokuapp.com/spa
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
 
 server --> browser  : HTML-code
 
