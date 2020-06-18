@@ -1,0 +1,39 @@
+title 0.6: New Note (Single Page App) Sequence Diagram
+# author: Hally / Harriette Bianan
+# date: June 17, 2020
+
+# from previous part (0.5), browser sent 4 HTTP request to display the SPA page
+# HTTP GET requests from html, css, javascript, and json
+# now the user will submit a new note but..
+# when submitting the form, it contains no "action" nor "method" attributes to define how to send the input data
+
+
+# user created and submitted a new note
+# now, browser sends an HTTP POST request to the server 
+browser -> server : HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+
+# the Request Header tells the server that the Content-type of the data is represented
+# in the JSON format. Without this header, the server would not know how to correctly
+# parse the data
+note over server :
+REQUEST HEADERS:
+    - Content-type: applicaiton/json
+    
+REQUEST PAYLOAD:
+{content: "new note", date: "2020-06-18T01:28:20.233Z"}
+
+Request call stack:
+    - sendToServer @ spa.js:43
+    - form.onsubmit @ spa.js:59
+end note
+
+
+server --> browser : Status Code 201 : {"message":"note created"}
+
+
+note over browser :
+server does not ask for a "redirect";
+browser stays on the same page
+and sends no further HTTP request
+end note
