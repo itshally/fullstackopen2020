@@ -1,0 +1,75 @@
+title 0.4: New Note Sequence Diagram
+# author: Hally / Harriette Bianan
+# date: June 17, 2020
+
+
+# User created then submitted a new note on the Notes page by clicking the submit button
+note over browser:
+Submits new note
+end note
+
+
+# the browser sends an HTTP POST request to the server
+browser -> server : HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
+
+
+# below this line is the server's response
+note over server:
+STATUS CODE: 302
+
+RESPONSE HEADERS:
+    - Location: /notes
+
+REQUEST HEADERS:
+    - Content-Type: application/x-www-form-urlencoded
+
+Form Data:
+    - note: Sample note text here
+end note
+
+
+# server asks the browser to do a new HTTP GET request to the /notes address
+# see RESPONSE HEADERS's location
+server --> browser  : HTTP Status Code 302
+
+
+note over browser:
+browser reloads the Notes page
+end note
+
+
+# browser reloads the Notes page and made 3 HTTP GET requests
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+
+server --> browser  : HTML code
+
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+server --> browser  : main.css
+
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+
+
+# JavaScript code starts to do its asynchronus task
+server --> browser  : main.js
+
+
+# browser executes JavaScript code, then returns the notes as JSON data
+note over browser :
+browser starts executing js-code
+that requests JSON data from server
+end note
+
+
+# the code makes a requests to the URL, which then returns the notes as JSON data
+browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+
+
+server --> browser : [{content: "Sample note text here", date: "2020-06-17"}, ...]\
+
+
+#  executes the event handler that renders the notes to display using DOM-API
+note over browser :
+browser executes the event handler
+that renders notes to display
+end note
