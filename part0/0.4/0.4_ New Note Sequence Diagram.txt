@@ -65,7 +65,7 @@ end note
 browser -> server : HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
 
 
-server --> browser : [{content: "Sample note text here", date: "2020-06-17"}, ...]\
+server --> browser : [{content: "HTML is easy", date: "2019-05-23T17:30:31.098Z"},…]
 
 
 #  executes the event handler that renders the notes to display using DOM-API
